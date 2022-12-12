@@ -64,4 +64,10 @@
     <Build Include="Tables\NetTerrainConfig.sql" />
     <Build Include="Tables\ConnectorConfig.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="CDCM.db.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CDCM.db.publish.xml" />
+  </ItemGroup>
 </Project>
