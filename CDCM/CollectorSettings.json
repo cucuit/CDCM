@@ -1,0 +1,139 @@
+{
+  "version": "9.7.1000.651",
+  "dataType": "appSettings",
+  "description": "netTerrain Collector settings",
+  "data": {
+    "discoverySettings": {
+      "ConnectorData": "{\r\n  \"AWS\": \"{\\r\\n  \\\"Enabled\\\": true,\\r\\n  \\\"Data\\\": {\\r\\n    \\\"ProxySettings\\\": {\\r\\n      \\\"Manual\\\": false,\\r\\n      \\\"Host\\\": null,\\r\\n      \\\"Port\\\": null,\\r\\n      \\\"Username\\\": null,\\r\\n      \\\"EncryptedPassword\\\": null\\r\\n    },\\r\\n    \\\"Credentials\\\": [\\r\\n      {\\r\\n        \\\"EncryptedSecretKey\\\": \\\"CBwCOCxANBBYFgEWGFc1KCkuB1IDThkOeQdyClUUI1J2d1pHGDc9SGo=\\\",\\r\\n        \\\"EncryptedAccessKey\\\": \\\"IjgtIDgqMzc+JiYkOFQ0OSpBNzxq\\\",\\r\\n        \\\"Region\\\": \\\"US East (N. Virginia) (us-east-1)\\\",\\r\\n        \\\"Name\\\": \\\"asdasd\\\",\\r\\n        \\\"MonitoringEnabled\\\": true,\\r\\n        \\\"ScaningEnabled\\\": true\\r\\n      },\\r\\n      {\\r\\n        \\\"EncryptedSecretKey\\\": \\\"cw==\\\",\\r\\n        \\\"EncryptedAccessKey\\\": \\\"cw==\\\",\\r\\n        \\\"Region\\\": \\\"Any Region\\\",\\r\\n        \\\"Name\\\": \\\"<Default>\\\",\\r\\n        \\\"MonitoringEnabled\\\": false,\\r\\n        \\\"ScaningEnabled\\\": true\\r\\n      }\\r\\n    ]\\r\\n  }\\r\\n}\"\r\n}",
+      "LanDiscoverySettings": null
+    },
+    "uploadSettings": {
+      "AgentName": "DESKTOP-C6KPIVJ",
+      "NtDiagramId": 24000000000001,
+      "NtConnectorType": "Connector",
+      "NtContainerType": "Container",
+      "Host": "https://eng.graphicalnetworks.com/demo",
+      "User": "admin",
+      "Password": "UBAjM3xedSQnDBlbSykYEEVLVV0QWDYmVTMUKjwNKyYNcXFiA05UD1MfUltWXz8qLjRRFgAVMgYTUBhWKCokMCk7DSAnFhgWfg12UFYoJwEFAGB8ehVWWV8=",
+      "AutoRefreshEnabled": true,
+      "AutoRefreshPeriod": 5,
+      "ProxyData": {
+        "Manual": false,
+        "Host": "",
+        "Port": "",
+        "Username": "",
+        "EncryptedPassword": "Xw=="
+      }
+    },
+    "appSettings": {
+      "ShowDiscoveryWizard": true,
+      "TableSettings": {
+        "AWS_": {
+          "SortedColumn": null,
+          "SortOrder": false,
+          "RecordsPerPage": 100,
+          "ColumnFitMode": 0,
+          "ColumnsWidth": {}
+        },
+        "AWS_Instances": {
+          "SortedColumn": null,
+          "SortOrder": false,
+          "RecordsPerPage": 100,
+          "ColumnFitMode": 1,
+          "ColumnsWidth": {}
+        },
+        "AWS_InstanceVolumeLinks": {
+          "SortedColumn": null,
+          "SortOrder": false,
+          "RecordsPerPage": 100,
+          "ColumnFitMode": 0,
+          "ColumnsWidth": {}
+        },
+        "AWS_Volumes": {
+          "SortedColumn": null,
+          "SortOrder": false,
+          "RecordsPerPage": 100,
+          "ColumnFitMode": 2,
+          "ColumnsWidth": {
+            "Account": 88,
+            "Region": 87,
+            "Attachments": 88,
+            "AvailabilityZone": 87,
+            "CreateTime": 88,
+            "Encrypted": 87,
+            "FastRestored": 88,
+            "Iops": 87,
+            "KmsKeyId": 88,
+            "MultiAttachEnabled": 87,
+            "OutpostArn": 88,
+            "Size": 87,
+            "SnapshotId": 88,
+            "State": 87,
+            "Tags": 88,
+            "Throughput": 87,
+            "VolumeId": 88,
+            "VolumeType": 87,
+            "ntObjectStatus": 100
+          }
+        },
+        "AWS_NetworkInterfaces": {
+          "SortedColumn": null,
+          "SortOrder": false,
+          "RecordsPerPage": 100,
+          "ColumnFitMode": 0,
+          "ColumnsWidth": {}
+        },
+        "AWS_InstanceNetworkInterfaceLinks": {
+          "SortedColumn": null,
+          "SortOrder": false,
+          "RecordsPerPage": 100,
+          "ColumnFitMode": 0,
+          "ColumnsWidth": {}
+        }
+      },
+      "Layout": {
+        "IsMaximized": true,
+        "WinRect": null,
+        "LeftSplitter": 300,
+        "TopSplitter": 300
+      },
+      "IsSeedSetupFirstTime": true,
+      "IpToolsetDialogSizes": {
+        "PING": {
+          "Size": null
+        }
+      }
+    },
+    "pollSettings": {
+      "Pollers": {
+        "Discovery": {
+          "Cycle": 5,
+          "Retries": 1,
+          "SnmpTimeout": 500,
+          "PingTimeout": 500,
+          "Enabled": false
+        },
+        "Ping": {
+          "Cycle": 5,
+          "Retries": 1,
+          "SnmpTimeout": 500,
+          "PingTimeout": 500,
+          "Enabled": false
+        }
+      }
+    },
+    "logSettings": {
+      "LogLevel": 2,
+      "LogLifeTimeType": 365
+    },
+    "skinSettings": {
+      "SelectedSkinFileName": "light.json"
+    },
+    "languageSettings": {
+      "LanguageId": 0
+    },
+    "trapListenerSettings": {
+      "RunOnApplicationStart": false
+    }
+  }
+}
