@@ -3,79 +3,78 @@ using CDCM.Domain.Models;
 using CDCM.Models;
 using System.Text.Json;
 
-namespace CDCM.APIs
+namespace CDCM.Api.APIs;
+
+public static class CollectorClientAPI
 {
-    public static class CollectorClientAPI
+    public static void ConfigureCollectorClientAPI(this WebApplication app)
     {
-        public static void ConfigureCollectorClientAPI(this WebApplication app)
+        app.MapGet("/CollectorClient", GetCollectorClients);
+        app.MapGet("/CollectorClient/{id}", GetCollectorClient);
+        app.MapPost("/CollectorClient", InsertCollectorClient);
+        app.MapPut("/CollectorClient", UpdateCollectorClient);
+        app.MapDelete("/CollectorClient/{id}", DeleteCollectorClient);
+    }
+
+
+    private static async Task<IResult> DeleteCollectorClient(ICollectorClientData _data, int id)
+    {
+        try
         {
-            app.MapGet("/CollectorClient", GetCollectorClients);
-            app.MapGet("/CollectorClient/{id}", GetCollectorClient);
-            app.MapPost("/CollectorClient", InsertCollectorClient);
-            app.MapPut("/CollectorClient", UpdateCollectorClient);
-            app.MapDelete("/CollectorClient/{id}", DeleteCollectorClient);
+            return Results.Ok(await _data.DeleteCollectorClient(id));
         }
-
-
-        private static async Task<IResult> DeleteCollectorClient(ICollectorClientData _data, int id)
+        catch (Exception ex)
         {
-            try
-            {
-                return Results.Ok(await _data.DeleteCollectorClient(id));
-            }
-            catch (Exception ex)
-            {
-                return Results.Problem(ex.Message);
-            }
+            return Results.Problem(ex.Message);
         }
+    }
 
 
-        private static async Task<IResult> UpdateCollectorClient(ICollectorClientData _data, CollectorClient client)
+    private static async Task<IResult> UpdateCollectorClient(ICollectorClientData _data, CollectorClient client)
+    {
+        try
         {
-            try
-            {
-                return Results.Ok(await _data.UpdateCollectorClient(client));
-            }
-            catch (Exception ex)
-            {
-                return Results.Problem(ex.Message);
-            }
+            return Results.Ok(await _data.UpdateCollectorClient(client));
         }
-
-        private static async Task<IResult> InsertCollectorClient(ICollectorClientData _data, CollectorClient client)
+        catch (Exception ex)
         {
-            try
-            {
-                return Results.Ok(await _data.InsertCollectorClient(client));
-            }
-            catch (Exception ex)
-            {
-                return Results.Problem(ex.Message);
-            }
+            return Results.Problem(ex.Message);
         }
+    }
 
-        private static async Task<IResult> GetCollectorClient(ICollectorClientData _data, int id)
+    private static async Task<IResult> InsertCollectorClient(ICollectorClientData _data, CollectorClient client)
+    {
+        try
         {
-            try
-            {
-                return Results.Ok(await _data.GetCollectorClient(id));
-            }
-            catch (Exception ex)
-            {
-                return Results.Problem(ex.Message);
-            }
+            return Results.Ok(await _data.InsertCollectorClient(client));
         }
-
-        public static async Task<IResult> GetCollectorClients(ICollectorClientData _data)
+        catch (Exception ex)
         {
-            try
-            {
-                return Results.Ok(await _data.GetCollectorClients());
-            }
-            catch (Exception ex)
-            {
-                return Results.Problem(ex.Message);
-            }
+            return Results.Problem(ex.Message);
+        }
+    }
+
+    private static async Task<IResult> GetCollectorClient(ICollectorClientData _data, int id)
+    {
+        try
+        {
+            return Results.Ok(await _data.GetCollectorClient(id));
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(ex.Message);
+        }
+    }
+
+    public static async Task<IResult> GetCollectorClients(ICollectorClientData _data)
+    {
+        try
+        {
+            return Results.Ok(await _data.GetCollectorClients());
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(ex.Message);
         }
     }
 }

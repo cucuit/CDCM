@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace CDCM.DataAccess;
 
-public partial class CollectorClientData : ICollectorClientData
+public class CollectorClientData : ICollectorClientData
 {
     private readonly IConfiguration _configuration;
 

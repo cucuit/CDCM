@@ -1,3 +1,4 @@
+using CDCM.Api.APIs;
 using CDCM.APIs;
 using CDCM.DataAccess;
 using CDCM.Models;
@@ -11,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<ISQLDataAccess, SQLDataAccess>();
 builder.Services.AddSingleton<ICollectorClientData, CollectorClientData>();
+builder.Services.AddSingleton<IConnectorData, ConnectorData>();
+builder.Services.AddSingleton<IConnectorConfigData, ConnectorConfigData>();
 
 var app = builder.Build();
 
@@ -22,7 +25,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.ConfigureCollectorConfigurationAPI();
 app.ConfigureCollectorClientAPI();
+app.ConfigureConnectorsAPI();
+app.ConfigureConnectorConfigAPI();
 
 app.Run();
