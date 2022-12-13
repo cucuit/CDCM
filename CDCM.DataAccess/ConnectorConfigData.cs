@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using System.Dynamic;
 using CDCM.Domain.DTO;
 using CDCM.Domain.Models;
 using Dapper;
@@ -16,7 +17,7 @@ public class ConnectorConfigData : IConnectorConfigData
         _configuration = configuration;
     }
 
-    public async Task<ConnectorConfig> GetConnectorConfig(ConnectorConfigDTO connectorConfig)
+    public async Task<ConnectorConfigUpdateDTO> GetConnectorConfig(ConnectorConfigDTO connectorConfig)
     {
         using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
         {
@@ -24,30 +25,19 @@ public class ConnectorConfigData : IConnectorConfigData
                         From dbo.ConnectorConfig
                         where   idConnector = {connectorConfig.IdConnector} and 
                                 idCollector = {connectorConfig.IdCollector}";
-            var result = await connection.QueryAsync<ConnectorConfig>(sql);
+            var result = await connection.QueryAsync<ConnectorConfigUpdateDTO>(sql);
             return result.FirstOrDefault();
         }
     }
-    public async Task<IEnumerable<ConnectorConfig>> GetConnectorConfigs()
+    public async Task<IEnumerable<ConnectorConfigUpdateDTO>> GetConnectorConfigs()
     {
         using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
         {
-            var sql = @$"Select *
+            var sql = @$"Select idConnector, idCollector, [Configuration],idFailedOverFrom,[Version]
                         From dbo.ConnectorConfig";
-            IEnumerable<ConnectorConfig>? connectorConfig = await connection.QueryAsync<ConnectorConfig>(sql);
-            var returnList = new List<ConnectorConfig>();
-            foreach (var connectorConfigDTO in connectorConfig)
-            {
-                returnList.Add(new ConnectorConfig()
-                {
-                    Collector = new CollectorClient() { Id = connectorConfigDTO.Collector.Id },
-                    Connector = new Connector() { Id = connectorConfigDTO.Connector.Id },
-                    FailOverFrom = new CollectorClient() { Id = connectorConfigDTO.FailOverFrom.Id },
-                    Configuration = connectorConfigDTO.Configuration,
-                    Version = connectorConfigDTO.Version
-                });
-            }
-            return returnList;
+            IEnumerable<dynamic> connectorConfig = await connection.QueryAsync<dynamic>(sql);
+            IEnumerable<ConnectorConfigUpdateDTO> connectorConfig2 = await connection.QueryAsync<ConnectorConfigUpdateDTO>(sql);
+            return connectorConfig2;
         }
     }
 
@@ -70,7 +60,7 @@ public class ConnectorConfigData : IConnectorConfigData
         using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
         {
             var sql = @$"Update dbo.ConnectorConfig 
-                            set [Configuration]={connectorConfig.Configuration},
+                            set [Configuration]='{connectorConfig.Configuration}',
                             idFailedOverFrom={connectorConfig.FailOverFrom.Id},
                             version='{connectorConfig.Version}'
                         where idConnector = {connectorConfig.Connector.Id} and 

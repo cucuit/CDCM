@@ -12,6 +12,6 @@ namespace CDCM.Domain.DTO
         public int IdCollector { get; set; }
         public string Configuration { get; set; }
         public string Version { get; set; }
-        public int IdFailOverFrom { get; set; }
+        public int idFailedOverFrom { get; set; }
     }
 }

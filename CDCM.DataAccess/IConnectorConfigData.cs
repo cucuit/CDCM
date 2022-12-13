@@ -6,8 +6,8 @@ namespace CDCM.DataAccess
     public interface IConnectorConfigData
     {
         Task<int> DeleteConnectorConfig(ConnectorConfigDTO connectorDeleteModel);
-        Task<ConnectorConfig> GetConnectorConfig(ConnectorConfigDTO connectorConfig);
-        Task<IEnumerable<ConnectorConfig>> GetConnectorConfigs();
+        Task<ConnectorConfigUpdateDTO> GetConnectorConfig(ConnectorConfigDTO connectorConfig);
+        Task<IEnumerable<ConnectorConfigUpdateDTO>> GetConnectorConfigs();
         Task<int> InsertConnectorConfigt(ConnectorConfig connectorConfig);
         Task<int> UpdateConnectorConfig(ConnectorConfig connectorConfig);
     }
