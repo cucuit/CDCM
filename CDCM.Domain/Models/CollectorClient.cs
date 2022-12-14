@@ -1,4 +1,6 @@
-﻿namespace CDCM.Domain.Models
+﻿using CDCM.Domain.DTO;
+
+namespace CDCM.Domain.Models
 {
     public class CollectorClient
     {
@@ -9,5 +11,7 @@
         public string Description { get; set; }
         public CollectorClient FailOverTo { get; set; }
         public DateTime LastPing { get; set; }
+
+        public List<ConnectorConfigUpdateDTO> Connectors { get; set; } = new List<ConnectorConfigUpdateDTO>();
     }
 }

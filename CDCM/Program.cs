@@ -5,6 +5,7 @@ using CDCM.Models;
 using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
+string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -15,14 +16,24 @@ builder.Services.AddSingleton<ICollectorClientData, CollectorClientData>();
 builder.Services.AddSingleton<IConnectorData, ConnectorData>();
 builder.Services.AddSingleton<IConnectorConfigData, ConnectorConfigData>();
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+builder.Services.AddCors(options =>
 {
-    app.UseSwagger();
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder =>
+                      {
+                          builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                      });
+});
+
+var app = builder.Build();
+app.UseCors(MyAllowSpecificOrigins);
+
+//// Configure the HTTP request pipeline.
+//if (app.Environment.IsDevelopment())
+//{
+app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseHttpsRedirection();
 

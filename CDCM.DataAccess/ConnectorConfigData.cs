@@ -40,6 +40,18 @@ public class ConnectorConfigData : IConnectorConfigData
             return connectorConfig2;
         }
     }
+    public async Task<IEnumerable<ConnectorConfigUpdateDTO>> GetConnectorConfigsByIdClient(int idClient)
+    {
+        using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
+        {
+            var sql = @$"Select idConnector, idCollector, [Configuration],idFailedOverFrom,[Version]
+                        From dbo.ConnectorConfig
+                        Where idCollector = {idClient}";
+            IEnumerable<dynamic> connectorConfig = await connection.QueryAsync<dynamic>(sql);
+            IEnumerable<ConnectorConfigUpdateDTO> connectorConfig2 = await connection.QueryAsync<ConnectorConfigUpdateDTO>(sql);
+            return connectorConfig2;
+        }
+    }
 
     public async Task<int> InsertConnectorConfigt(ConnectorConfig connectorConfig)
     {

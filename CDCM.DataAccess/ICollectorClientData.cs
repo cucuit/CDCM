@@ -7,7 +7,7 @@ namespace CDCM.DataAccess
         Task<int> DeleteCollectorClient(int id);
         Task<CollectorClient> GetCollectorClient(int id);
         Task<IEnumerable<CollectorClient>> GetCollectorClients();
-        Task<int> InsertCollectorClient(CollectorClient collectorClient);
-        Task<int> UpdateCollectorClient(CollectorClient collectorClient);
+        Task<CollectorClient> InsertCollectorClient(CollectorClient collectorClient);
+        Task<CollectorClient> UpdateCollectorClient(CollectorClient collectorClient);
     }
 }

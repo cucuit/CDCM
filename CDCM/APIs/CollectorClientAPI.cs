@@ -1,4 +1,5 @@
 ﻿using CDCM.DataAccess;
+using CDCM.Domain.DTO;
 using CDCM.Domain.Models;
 using CDCM.Models;
 using System.Text.Json;
@@ -30,10 +31,19 @@ public static class CollectorClientAPI
     }
 
 
-    private static async Task<IResult> UpdateCollectorClient(ICollectorClientData _data, CollectorClient client)
+    private static async Task<IResult> UpdateCollectorClient(ICollectorClientData _data, CollectorClientPutDTO clientDTO)
     {
         try
         {
+            CollectorClient client = new CollectorClient()
+            {
+                Id = clientDTO.Id,
+                Name = clientDTO.Name,
+                Description = clientDTO.Description,
+                IpAddress = clientDTO.IpAddress,
+                LastPing = DateTime.Now,
+                FailOverTo = new CollectorClient() { Id=clientDTO.IdFailOverTo}
+            };
             return Results.Ok(await _data.UpdateCollectorClient(client));
         }
         catch (Exception ex)
@@ -42,10 +52,19 @@ public static class CollectorClientAPI
         }
     }
 
-    private static async Task<IResult> InsertCollectorClient(ICollectorClientData _data, CollectorClient client)
+    private static async Task<IResult> InsertCollectorClient(ICollectorClientData _data, CollectorClientPostDTO clientDTO)
     {
         try
         {
+            CollectorClient client = new CollectorClient()
+            {
+                Name = clientDTO.Name,
+                Description = clientDTO.Description,
+                IpAddress = clientDTO.IpAddress,
+                Version = "1",
+                FailOverTo = new CollectorClient() { Id = clientDTO.IdFailOverTo },
+                LastPing = DateTime.Now
+            };
             return Results.Ok(await _data.InsertCollectorClient(client));
         }
         catch (Exception ex)
