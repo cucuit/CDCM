@@ -30,7 +30,6 @@ public static class CollectorClientAPI
         }
     }
 
-
     private static async Task<IResult> UpdateCollectorClient(ICollectorClientData _data, CollectorClientPutDTO clientDTO)
     {
         try

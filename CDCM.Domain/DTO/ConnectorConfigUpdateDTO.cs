@@ -10,9 +10,9 @@ namespace CDCM.Domain.DTO
     {
         public int IdConnector { get; set; }
         public int IdCollector { get; set; }
-        public string Configuration { get; set; }
         public string Version { get; set; }
         public int idFailedOverFrom { get; set; }
+        public string Name { get; set; }
     }
 
     public class CollectorClientPostDTO
@@ -25,7 +25,6 @@ namespace CDCM.Domain.DTO
     public class CollectorClientPutDTO : CollectorClientPostDTO
     {
         public int Id { get; set; }
-
     }
 }
 

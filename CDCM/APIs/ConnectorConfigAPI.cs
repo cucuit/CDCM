@@ -60,7 +60,7 @@ public static class ConnectorConfigAPI
             {
                 Collector = new CollectorClient() { Id = connectorConfig.IdCollector },
                 Connector = new Connector() { Id = connectorConfig.IdConnector },
-                Configuration = connectorConfig.Configuration,
+                //Configuration = connectorConfig.Configuration,
                 FailOverFrom = new CollectorClient() { Id = connectorConfig.idFailedOverFrom },
                 Version = connectorConfig.Version
             }));
@@ -78,7 +78,7 @@ public static class ConnectorConfigAPI
             {
                 Collector = new CollectorClient() { Id = connectorConfig.IdCollector },
                 Connector = new Connector() { Id = connectorConfig.IdConnector },
-                Configuration = connectorConfig.Configuration,
+                //Configuration = connectorConfig.Configuration,
                 FailOverFrom = new CollectorClient() { Id = connectorConfig.idFailedOverFrom },
                 Version = connectorConfig.Version
             }));

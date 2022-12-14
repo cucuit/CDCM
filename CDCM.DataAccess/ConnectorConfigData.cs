@@ -35,7 +35,7 @@ public class ConnectorConfigData : IConnectorConfigData
         {
             var sql = @$"Select idConnector, idCollector, [Configuration],idFailedOverFrom,[Version]
                         From dbo.ConnectorConfig";
-            IEnumerable<dynamic> connectorConfig = await connection.QueryAsync<dynamic>(sql);
+            
             IEnumerable<ConnectorConfigUpdateDTO> connectorConfig2 = await connection.QueryAsync<ConnectorConfigUpdateDTO>(sql);
             return connectorConfig2;
         }
@@ -44,10 +44,10 @@ public class ConnectorConfigData : IConnectorConfigData
     {
         using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
         {
-            var sql = @$"Select idConnector, idCollector, [Configuration],idFailedOverFrom,[Version]
-                        From dbo.ConnectorConfig
-                        Where idCollector = {idClient}";
-            IEnumerable<dynamic> connectorConfig = await connection.QueryAsync<dynamic>(sql);
+            var sql = @$"Select idConnector, idCollector, [Configuration],idFailedOverFrom,c.[Version], c.name
+                        From dbo.ConnectorConfig, dbo.Connectors c
+                        Where idCollector = {idClient} and idconnector = c.id";
+         
             IEnumerable<ConnectorConfigUpdateDTO> connectorConfig2 = await connection.QueryAsync<ConnectorConfigUpdateDTO>(sql);
             return connectorConfig2;
         }

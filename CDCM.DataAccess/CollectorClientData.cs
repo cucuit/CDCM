@@ -32,14 +32,6 @@ public class CollectorClientData : ICollectorClientData
 
             client.Connectors.AddRange(clientCnnectors);
 
-            //sql = @$"Select *
-            //            From dbo.ConnectorConfig
-            //            where   idCollector = {id}";
-
-            //var result = await connection.QueryAsync<Connector>(sql);
-
-            //client.Connectors.AddRange(result.ToList());
-
             return client;
         }
     }
