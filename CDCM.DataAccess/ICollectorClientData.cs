@@ -9,5 +9,7 @@ namespace CDCM.DataAccess
         Task<IEnumerable<CollectorClient>> GetCollectorClients();
         Task<CollectorClient> InsertCollectorClient(CollectorClient collectorClient);
         Task<CollectorClient> UpdateCollectorClient(CollectorClient collectorClient);
+        Task IsAlive(int id);
+        Task<CollectorClient> GetCollectorClientByHash(string hash);
     }
 }

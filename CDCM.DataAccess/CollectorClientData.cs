@@ -57,10 +57,11 @@ public class CollectorClientData : ICollectorClientData
     {
         using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
         {
-            var sql = @$"insert into dbo.CollectorClient ([name], [IpAddress], Description)
+            var sql = @$"insert into dbo.CollectorClient ([name], [IpAddress], Description, [Hash])
                             values ('{collectorClient.Name}',
                                     '{collectorClient.IpAddress}',
-                                    '{collectorClient.Description}') ";
+                                    '{collectorClient.Description}',
+                                    '{collectorClient.Hash}') ";
 
             var i = await connection.ExecuteAsync(sql);
 
@@ -99,6 +100,43 @@ public class CollectorClientData : ICollectorClientData
             var i = await connection.ExecuteAsync(sql);
 
             return i;
+        }
+    }
+
+    public async Task IsAlive(int id)
+    {
+        var sql = @$"Update dbo.CollectorClient set [LastPing]='{DateTime.Now}'
+                        where id = {id} ";
+
+        using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
+        {
+            try
+            {
+                await connection.ExecuteAsync(sql);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+    }
+
+    public async Task<CollectorClient> GetCollectorClientByHash(string hash)
+    {
+        using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
+        {
+            var sql = @$"Select *
+                        From dbo.CollectorClient
+                        where hash = {hash}";
+            var queryResult = await connection.QueryAsync<CollectorClient>(sql);
+            var client = queryResult.First();
+
+            var clientCnnectors = await _connectorConfigData.GetConnectorConfigsByIdClient(client.Id);
+
+            client.Connectors.AddRange(clientCnnectors);
+
+            return client;
         }
     }
 

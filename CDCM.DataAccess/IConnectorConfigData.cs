@@ -11,5 +11,6 @@ namespace CDCM.DataAccess
         Task<IEnumerable<ConnectorConfigUpdateDTO>> GetConnectorConfigsByIdClient(int idClient);
         Task<int> InsertConnectorConfigt(ConnectorConfig connectorConfig);
         Task<int> UpdateConnectorConfig(ConnectorConfig connectorConfig);
+        Task FailConnectorsConfig(IEnumerable<ConnectorConfigUpdateDTO> myConfigs);
     }
 }

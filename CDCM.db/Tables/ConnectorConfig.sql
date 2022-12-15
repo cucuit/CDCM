@@ -5,5 +5,6 @@
     [Configuration] VARCHAR(MAX) NULL, 
     [idFailedOverFrom] INT NULL, 
     [Version] VARCHAR(50) NULL, 
-    CONSTRAINT [PK_ConnectorConfig] PRIMARY KEY ([idConnector], [idCollector])
+    [Id] INT NOT NULL identity (1,1), 
+    CONSTRAINT [PK_ConnectorConfig] PRIMARY KEY ([Id])
 )

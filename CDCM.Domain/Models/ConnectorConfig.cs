@@ -2,6 +2,7 @@
 {
     public class ConnectorConfig
     {
+        public int Id { get; set; }
         public Connector Connector { get; set; }
         public CollectorClient Collector { get; set; }
         public string Configuration { get; set; }

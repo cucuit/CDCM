@@ -33,7 +33,7 @@ public class ConnectorConfigData : IConnectorConfigData
     {
         using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
         {
-            var sql = @$"Select idConnector, idCollector, [Configuration],idFailedOverFrom,[Version]
+            var sql = @$"Select Id, idConnector, idCollector, [Configuration],idFailedOverFrom,[Version]
                         From dbo.ConnectorConfig";
             
             IEnumerable<ConnectorConfigUpdateDTO> connectorConfig2 = await connection.QueryAsync<ConnectorConfigUpdateDTO>(sql);
@@ -44,8 +44,8 @@ public class ConnectorConfigData : IConnectorConfigData
     {
         using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
         {
-            var sql = @$"Select idConnector, idCollector, [Configuration],idFailedOverFrom,c.[Version], c.name
-                        From dbo.ConnectorConfig, dbo.Connectors c
+            var sql = @$"Select cc.id, idConnector, idCollector, [Configuration],idFailedOverFrom,c.[Version], c.name
+                        From dbo.ConnectorConfig cc, dbo.Connectors c
                         Where idCollector = {idClient} and idconnector = c.id";
          
             IEnumerable<ConnectorConfigUpdateDTO> connectorConfig2 = await connection.QueryAsync<ConnectorConfigUpdateDTO>(sql);
@@ -90,6 +90,21 @@ public class ConnectorConfigData : IConnectorConfigData
                                 idCollector = {connectorDeleteModel.IdCollector}";
             var i = await connection.ExecuteAsync(sql);
             return i;
+        }
+    }
+
+    public async Task FailConnectorsConfig(IEnumerable<ConnectorConfigUpdateDTO> myConfigs)
+    {
+        foreach (var config in myConfigs)
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
+            {
+                var sql = @$"Update dbo.ConnectorConfig 
+                                Set idCollector = {config.IdCollector}, 
+                                    idFailedOverFrom = {config.idFailedOverFrom}
+                                Where id = {config.Id}";
+                var i = await connection.ExecuteAsync(sql);
+            }
         }
     }
 }

@@ -6,5 +6,6 @@
     [IpAddress] VARCHAR(50) NULL, 
     [Description] VARCHAR(50) NULL, 
     [IdFailOverTo] INT NULL DEFAULT 0, 
-    [LastPing] DATETIME2 NULL DEFAULT GetDate()
+    [LastPing] DATETIME2 NULL DEFAULT GetDate(), 
+    [Hash] VARCHAR(MAX) NULL
 )
